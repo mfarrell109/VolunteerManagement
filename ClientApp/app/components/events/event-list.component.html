@@ -1,0 +1,41 @@
+﻿<div class='panel panel-heading'>
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter: </div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='eventFilter' />
+            </div>
+        </div>
+        <div class='table-responsive'>
+            <table class='table'><!-- *ngIf='events'>-->
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr *ngFor='let event of events'>
+                    <td><img [src]='event.imageUrl' [title]='event.name' 
+                             [style.width.px]='imageWidth'
+                             [style.margin.px]='imageMargin'
+                             /></td>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.date | date}}</td>
+                </tr>
+            </tbody>
+            </table>
+            <div class='row'>
+            <div class='col-md-2'>
+                <button type="button" class="btn btn-success" (click)="addEvent()">
+                    Add Event
+                </button>   
+
+                
+            </div>
+            
+        </div>
+        </div>
+    </div>
+</div>
