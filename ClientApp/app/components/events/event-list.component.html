@@ -3,39 +3,47 @@
         <div class='row'>
             <div class='col-md-2'>Filter: </div>
             <div class='col-md-4'>
-                <input type='text' [(ngModel)]='eventFilter' />
+                <input type='text' [(ngModel)]='listFilter' />
             </div>
         </div>
+        <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
         <div class='table-responsive'>
-            <table class='table'><!-- *ngIf='events'>-->
+            <table class='table'>
+                <!-- *ngIf='events'>-->
                 <thead>
                     <tr>
                         <th></th>
                         <th>Name</th>
                         <th>Date</th>
+                        <th>Pricing</th>
                     </tr>
                 </thead>
-            <tbody>
-                <tr *ngFor='let event of events'>
-                    <td><img [src]='event.imageUrl' [title]='event.name' 
-                             [style.width.px]='imageWidth'
-                             [style.margin.px]='imageMargin'
-                             /></td>
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.date | date}}</td>
-                </tr>
-            </tbody>
+                <tbody>
+                    <tr *ngFor='let event of events | eventFilter:listFilter'>
+                        <td><img [src]='event.imageUrl'
+                            [title]='event.name' 
+                            [style.width.px]='imageWidth'
+                            [style.margin.px]='imageMargin'/>
+                        </td>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.date | date}}</td>
+                        <td>
+                            General Admission: {{ event.gaPrice | currency:'USD':true:'1.2-2'}}
+                            <br/> Orchestra: {{ event.orchestraPrice | currency:'USD':true:'1.2-2'}}
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div class='row'>
-            <div class='col-md-2'>
-                <button type="button" class="btn btn-success" (click)="addEvent()">
+                <div class='col-md-2'>
+                    <button type="button" class="btn btn-success" (click)="addEvent()">
                     Add Event
-                </button>   
+                </button>
 
-                
+
+                </div>
+
             </div>
-            
-        </div>
         </div>
     </div>
 </div>
